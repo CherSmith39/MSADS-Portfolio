@@ -1,0 +1,235 @@
+---
+title: "IST 707 Project"
+author: "Charles Hohl, Sarah Morris, Cheromaine Smith, Joshua Wiser"
+date: "2024-01-31"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### STEP 1: LIBRARY NECESSARY PACKAGES
+
+```{r}
+library(magrittr)
+library(dplyr)
+library(knitr)
+library(tidyverse)
+library(tibble)
+library(conflicted)
+library(readr)
+```
+
+### STEP 2: READ DATA INTO R STUDIO
+
+```{r pressure, echo=FALSE}
+setwd("C:/Users/csmit116/OneDrive - Syracuse University/Desktop/Data Science Degree/IST 707/Final Project")
+Stadiums <- read.csv('nfl_stadiums.csv')
+Teams<-read.csv('nfl_teams.csv')
+Scores<-read.csv('spreadspoke_scores.csv')
+```
+
+### STEP 3: REVIEW DATA
+
+```{r}
+#Review the data
+head(Stadiums)
+head(Teams)
+head(Scores)
+str(Stadiums)
+str(Teams)
+str(Scores)
+summary(Stadiums)
+summary(Teams)
+summary(Scores)
+
+```
+
+### STEP 4: CLEAN DATA
+
+```{r}
+#Get rid of NAs
+sum(is.na(Stadiums))
+sum(is.na(Teams))
+sum(is.na(Scores))
+
+#Converting variables
+Stadiums$stadium_latitude<-as.numeric(Stadiums$stadium_latitude)
+Stadiums$stadium_longitude<-as.numeric(Stadiums$stadium_longitude)
+Stadiums$stadium_elevation<-as.numeric(Stadiums$stadium_elevation)
+Scores$weather_temperature<-as.numeric(Scores$weather_temperature)
+Scores$score_home<-as.numeric(Scores$score_home)
+Scores$score_away<-as.numeric(Scores$score_away)
+Scores$weather_wind_mph<-as.numeric(Scores$weather_wind_mph)
+Scores$weather_humidity<-as.numeric(Scores$weather_humidity)
+Scores$spread_favorite<-as.numeric(Scores$spread_favorite)
+Scores$schedule_week<- as.numeric(Scores$schedule_week)
+```
+
+### STEP 4: DATA PREPROCESSING
+
+```{r}
+
+table(sort(Scores$team_favorite_id))
+
+#Create a winners list
+Winner<-c()
+  for(i in 1:length(Scores$score_home)){
+    if(is.na(Scores$score_home[i])||is.na(Scores$score_away[i])){
+      Winner<- append(Winner,"Missing")
+    } else if(Scores$score_home[i] > Scores$score_away[i]){
+      Winner<- append(Winner, Scores$team_home[i])
+    } else if(Scores$score_home[i] < Scores$score_away[i]){
+      winner<- append(Winner, Scores$team_away[i])
+    } else{
+      Winner<- append(Winner,"Tie")
+    }
+  }
+
+WinnerFinal<- ifelse(is.na(Scores$score_home) | is.na(Scores$score_away), "Missing",
+                ifelse(Scores$score_home > Scores$score_away, Scores$team_home,
+                       ifelse(Scores$score_home < Scores$score_away, Scores$team_away, "Tie")))
+
+
+Scores$Winner <- WinnerFinal
+
+NewDF<-Scores[sample(nrow(Scores), 25), c("team_home","score_home", "score_away", "team_away", "Winner")]
+
+#Filter Team to Kansas City Chiefs
+Kansas <- Scores[Scores$team_home == "Kansas City Chiefs"|Scores$team_away == "Kansas City Chiefs",]
+KansasW<- ifelse(is.na(Kansas$score_home) | is.na(Kansas$score_away), "Missing",
+                ifelse(Kansas$score_home > Kansas$score_away, Kansas$team_home,
+                       ifelse(Kansas$score_home < Kansas$score_away, Kansas$team_away, "Tie")))
+Kansas$Winner<- KansasW
+Kansas$Winner<-ifelse(Kansas$Winner=="Kansas City Chiefs", 1, 0)
+
+str(Kansas)
+
+#Correlation Matrix
+library(corrplot)
+
+KCC_HWins<-Kansas$Winner[Kansas$team_home=="Kansas City Chiefs"]
+KCC_HWins<- KCC_HWins[]
+KCC_HWins<-as.numeric(KCC_HWins)
+KCC_HWSums<- sum(Kansas$team_home=="Kansas City Chiefs" & Kansas$Winner=="Kansas City Chiefs")
+KCC_AWins<-Kansas$Winner[Kansas$team_away=="Kansas City Chiefs"]
+KCC_AWins<-as.numeric(KCC_AWins)
+KCC_AWSUms<- sum(Kansas$team_away=="Kansas City Chiefs" & Kansas$Winner=="Kansas City Chiefs")
+view(KCC_HWins, KCC_AWins)
+
+corr<-cor(KCC_HWins,KCC_AWins)
+
+mask<- upper.tri(corr)
+
+par(mfrow = c(1,1), mar = c(5, 4, 4, 2) + 0.1, oma = c(0, 0, 2, 0))
+plot.new()
+plot.window(xlim = c(0, 1), ylim = c(0, 1))
+
+library(RColorBrewer)
+cmap<- colorRampPalette(brewer.pal(11, "RdBu"))(100)
+
+par(las = 2)
+heatmap(as.matrix(corr), mask=mask, col=cmap, breaks=seq(-1, 1, length.out=101),
+        main = "Correlation HeatMap", xlab = "Variables", ylab= "Variables", cex.main = 1.5, cex.axis = 1.2, cex.lab = 1.2)
+
+
+#When Does Kansas Win
+install.packages("zoo")
+library(zoo)
+library(dplyr)
+conflicts_prefer(dplyr::filter)
+Kansas<-na.aggregate(Kansas, FUN= median)
+KC_wins<-Kansas%>%filter(Winner=="Kansas City Chiefs")
+#Select Variables
+Kansas$schedule_week<- as.numeric(Kansas$schedule_week)
+Kansas$score_home<- as.numeric(Kansas$score_home)
+Kansas$score_away<- as.numeric(Kansas$score_away)
+Kansas$spread_favorite<- as.numeric(Kansas$spread_favorite)
+Kansas$over_under_line<- as.numeric(Kansas$over_under_line)
+Kansas$weather_temperature<- as.numeric(Kansas$weather_temperature)
+Kansas$weather_wind_mph<- as.numeric(Kansas$weather_wind_mph)
+Kansas$weather_humidity<- as.numeric(Kansas$weather_humidity)
+Kansas$Winner<- as.numeric(Kansas$Winner)
+Select_Variables<- KC_wins%>%select(schedule_week, score_home, score_away, spread_favorite, over_under_line, weather_temperature, weather_wind_mph, weather_humidity, Winner)
+#Corr Matrix
+Select_Variables<-Select_Variables%>%mutate_all(as.numeric)
+Select_Variables<- na.omit(Select_Variables)
+corr_mat<-cor(Select_Variables)
+corr_mat
+#HeatMap
+heatmap(corr_mat, col=colorRampPalette(c("blue","white","red"))(100),
+        main= "Kansas City Correlation Matrix")
+
+
+```
+
+
+
+
+```{r}
+WinnerFinal<- ifelse(is.na(Scores$score_home) | is.na(Scores$score_away), "Missing",
+                ifelse(Scores$score_home > Scores$score_away, Scores$team_home,
+                       ifelse(Scores$score_home < Scores$score_away, Scores$team_away, "Tie")))
+
+Scores$Winner <- WinnerFinal
+
+NewDF<-Scores[sample(nrow(Scores), 25), c("team_home","score_home", "score_away", "team_away", "Winner")]
+
+Kansas <- Scores[Scores$team_home == "Kansas City Chiefs"|Scores$team_away == "Kansas City Chiefs",]
+KansasW<- ifelse(is.na(Kansas$score_home) | is.na(Kansas$score_away), "Missing",
+                ifelse(Kansas$score_home > Kansas$score_away, Kansas$team_home,
+                       ifelse(Kansas$score_home < Kansas$score_away, Kansas$team_away, "Tie")))
+Kansas$Winner<- KansasW
+Kansas$Winner<-ifelse(Kansas$Winner=="Kansas City Chiefs", 1, 0)
+
+install.packages("zoo")
+library(zoo)
+library(dplyr)
+conflicts_prefer(dplyr::filter)
+
+Kansas<-na.aggregate(Kansas, FUN= median)
+KC_wins<-Kansas%>%filter(Winner=="Kansas City Chiefs")
+Select_Variables<- KC_wins%>%select(score_home, score_away, spread_favorite, over_under_line, weather_temperature, weather_wind_mph, weather_humidity)
+#Corr Matrix
+Select_Variables<-Select_Variables%>%mutate_all(as.numeric)
+Select_Variables<- na.omit(Select_Variables)
+corr_mat<-cor(Select_Variables)
+corr_mat
+#HeatMap
+heatmap(corr_mat, col=colorRampPalette(c("red","white","green"))(100),
+        main= "Kansas City Correlation Matrix")
+library(ggplot2)
+ggplot(data = Kansas, aes(x=Date, y=Score))+
+  geom_line()+
+  labs(title="Scores over Time", x="schedule_date", y="Winner")
+
+Teams$team_num<-Teams%>%mutate(team_name= row_number())
+Scores$teamid<- Teams$team_num
+cor(Kansas$Winner, Kansas$spread_favorite)
+
+merged_data<-merge(Scores,Teams, by.x = "Winner", by.y = "team_name", all.x = TRUE)
+Scores$winner_id<-match(Scores$Winner, Teams$team_name)
+cor(Scores$winner_id, Scores$spread_favorite)
+```
+
+#Refine the model
+
+```{r}
+#Library packages
+library(caret)
+library(dplyr)
+
+#Preprocessing in the datasets
+Scores$stadium_name<- Scores$stadium
+Teams$idnum<- seq_along(Teams$team_name)
+Scores$hmtm<- merge(Scores, Teams, by="Teams$idnum")
+Scores$awtm<- merge(Scores, Teams, by=" ")
+
+#Merge data sets
+Sco_Sta_Merg<- merge(Scores, Stadiums, by="stadium_name")
+
+#Model Selection
+
+```
+

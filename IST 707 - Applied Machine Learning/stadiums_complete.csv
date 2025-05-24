@@ -1,0 +1,66 @@
+stadium_name,stadium_open,stadium_close,stadium_type,stadium_weather_type,stadium_capacity,stadium_surface,stadium_latitude,stadium_longitude,stadium_azimuthangle,stadium_elevation
+Acrisure Stadium,2001,,outdoor,cold,"65,500",Grass,40.4846,-80.2144,,366.7
+Alamo Dome,1993,,indoor,warm,72000,FieldTurf,29.416944,-98.478889,0,202
+Allegiant Stadium,2020,,indoor,warm,65000,Grass,36.09075,-115.183722,0,670
+Allianz Arena,2005,,outdoor,moderate,"75,024",Grass,48.218967,11.623746,,520
+Alltel Stadium,1995,,outdoor,warm,"82,000",FieldTurf,30.323889,-81.6375,16.7,6.1
+Alumni Stadium,1957,,outdoor,cold,"44,500",Grass,42.335118,-71.166461,316.3,39.841
+Arrowhead Stadium,1972,,outdoor,cold,"76,416",Grass,39.048889,-94.483889,,264.9
+AT&T Stadium,2009,,retractable,warm,"80,000",FieldTurf,32.747778,-97.092778,68,163.4
+Balboa Stadium,1978,,outdoor,warm,"3,000",Grass,32.730831,-117.142586,,50
+Bills Stadium,1973,,outdoor,cold,"73,967",FieldTurf,42.889,-78.8901,,178
+Caesars Superdome,1975,,indoor,warm,"76,468",FieldTurf,29.95083,90.081108,,1
+CenturyLink Field,2002,,outdoor,moderate,"67,000",FieldTurf,47.5952,-122.3316,0,93
+Cotton Bowl,1930,,outdoor,moderate,"92,100",FieldTurf,32.7795083,-96.7595489,,140
+Cowboys Stadium,2009,,retractable,warm,"80,000",FieldTurf,32.7572,-97.0736,,163.4
+Dignity Health Sports Park,2019,,outdoor,warm,27000,Grass,33.864,-118.261,0,15
+Dolphin Stadium,1987,,outdoor,warm,"65,326",Grass,25.7905,-80.3163,,8.8
+Edward Jones Dome,1995,,indoor,cold,"67,000",FieldTurf,38.632778,-90.188611,15,142
+Empower Field at Mile High,2001,,outdoor,cold,"76,125",Grass,39.743889,-105.02,0,1611.2
+Estadio Azteca,1966,,outdoor,warm,"83,264",Grass,19.302911,-99.150442,5.9,2200
+EverBank Field,1995,,outdoor,warm,"67,264",Grass,30.23333,-81.66667,,6.1
+Fenway Park,1912,,outdoor,cold,"37,755",Grass,42.346268,-71.095764,,5
+FirstEnergy Stadium,1999,,outdoor,cold,"68,000",Grass,41.506111,-81.699444,56.1,238
+Ford Field,2002,,indoor,cold,"65,000",FieldTurf,42.34,-83.045556,63.7,184
+Frankfurt Stadium,1925,,retractable,cold,"58,000",Grass,50.068056,8.645806,,367
+Franklin Field,1895,,outdoor,cold,"52,958",Grass,39.900898,-75.168098,,12
+GEHA Field at Arrowhead Stadium,1972,,outdoor,cold,"76,416",Grass,39.048889,-94.483889,316.3,264.9
+Gillette Stadium,2002,,outdoor,cold,"68,756",FieldTurf,42.091,-71.264,343,24.4
+Hard Rock Stadium,1987,,outdoor,warm,"65,326",Grass,25.958056,-80.238889,302.1,8.8
+Heinz Field,2001,,outdoor,cold,"65,500",Grass,40.446667,-80.015833,333.9,366.7
+Highmark Stadium,1973,,outdoor,cold,"73,967",FieldTurf,42.889,-78.8901,,178
+Lambeau Field,1957,,outdoor,cold,"80,735",Grass,44.501389,-88.062222,0,209.4
+Lincoln Financial Field,2003,,outdoor,cold,"69,176",Grass,39.900833,-75.1675,351,3
+Los Angeles Memorial Coliseum,1946,,outdoor,warm,"93,605",Grass,34.014167,-118.287778,90,29.6
+Lucas Oil Stadium,2008,,retractable,cold,"63,000",FieldTurf,39.760056,-86.162806,26.6,227.1
+Lumen Field,2002,,outdoor,moderate,"67,000",FieldTurf,47.6523,-122.4095,,93
+M&T Bank Stadium,1998,,outdoor,moderate,"71,008",FieldTurf,39.278056,-76.622778,289.5,47.5
+Mercedes-Benz Stadium,2017,,retractable,moderate,71000,FieldTurf,33.755556,-84.4,70.9,308
+MetLife Stadium,2010,,outdoor,cold,"82,500",FieldTurf,40.813528,-74.074361,345.5,2.1
+New Era Field,1973,,outdoor,cold,"73,967",FieldTurf,42.774,-78.787,302.1,178
+Nippert Stadium,1915,,outdoor,cold,"40,000",Grass,39.1311705,-84.5160542,,230
+NRG Stadium,2002,,retractable,warm,"71,500",Grass,29.684722,-95.410833,358.2,13.4
+Oakland Coliseum,1966,,outdoor,moderate,"53,250",Grass,37.751667,-122.200556,324.7,1.8
+Paul Brown Stadium,2000,,outdoor,cold,"65,515",FieldTurf,39.095,-84.516,320.6,193.9
+Paycor Stadium,2000,,outdoor,cold,"65,515",FieldTurf,39.1,-84.51667,,193.9
+Ralph Wilson Stadium,1973,,outdoor,cold,"73,967",FieldTurf,42.889,-78.8901,,178
+Reliant Stadium,2002,,retractable,warm,"71,500",Grass,29.63806,-95.28194,,13.4
+Rogers Centre,1989,,retractable,cold,"49,286",Grass,43.641389,-79.389167,346.4,82
+Rose Bowl,1921,,outdoor,moderate,"89,702",Grass,34.161327,-118.167648,,255
+SoFi Stadium,2020,,outdoor,warm,70240,FieldTurf,33.95345,-118.3392,338.2,30
+Soldier Field,1926,,outdoor,cold,"61,500",Grass,41.8623,-87.6167,353.9,177.7
+Sports Authority Field at Mile High,2001,,outdoor,cold,"76,125",Grass,39.7633,-104.8694,,1611.2
+Stanford Stadium,2006,,outdoor,moderate,"50,424",Grass,37.4345,-122.166077,,18
+State Farm Stadium,2006,,retractable,warm,"63,400",Grass,33.528,-112.263,330,375.2
+StubHub Center,2017,,outdoor,warm,27000,Grass,33.938,-118.3888,,29.6
+Tampa Stadium,1998,,outdoor,warm,"75,000",Grass,27.9759,-82.5033,,11
+TIAA Bank Field,1995,,outdoor,warm,"67,264",Grass,30.323889,-81.6375,16.7,6.1
+Tiger Stadium,2000,,outdoor,cold,"41,083",Grass,30.412035,-91.183815,,8
+Tottenham Hotspur Stadium,2019,,retractable,moderate,"62,850",Grass,51.604444,-0.066389,0,11
+Tulane Stadium,2014,,outdoor,warm,"30,000",Grass,29.9446,-90.1167,,0
+Twickenham Stadium,1909,,outdoor,moderate,"82,000",Grass,51.456111,-0.341667,324.8,10
+U.S. Bank Stadium,2016,,indoor,cold,"66,200",FieldTurf,44.973889,-93.258056,309.9,255
+University of Phoenix Stadium,2006,,retractable,warm,"63,400",Grass,33.4552,-111.9316,,375.2
+Wembley Stadium,2007,,outdoor,moderate,"90,000",Grass,51.555833,-0.279722,90,52
+Yale Bowl,1914,,outdoor,cold,"64,246",Grass,41.316307,-72.922585,,13
+Yankee Stadium,2009,,outdoor,cold,"46,537",Grass,40.82917,-73.92639,,5
